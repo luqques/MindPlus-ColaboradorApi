@@ -5,7 +5,7 @@ namespace MinhaApiAula.Infrastructure
 {
     public class Connection
     {
-        protected string connectionString = "Server=localhost; Database=aula; User=root; Password=root;";
+        protected string connectionString = "Server=localhost; Database=mindplus; User=root; Password=root;";
 
         protected MySqlConnection GetConnection()
         {

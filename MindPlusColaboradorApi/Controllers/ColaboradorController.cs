@@ -29,7 +29,6 @@ namespace MindPlusColaboradorApi.Controllers
             return Ok("Colaborador cadastrado com sucesso.");
         }
 
-
         [HttpPut]
         public async Task<IActionResult> AtualizarColaborador(ColaboradorEntity colaborador)
         {
