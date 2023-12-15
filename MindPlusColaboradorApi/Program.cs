@@ -12,6 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<IColaboradorRepository, ColaboradorRepository>();
 
+builder.Services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+
+builder.Services.AddTransient<IAvaliacaoRepository, AvaliacaoRepository>();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
