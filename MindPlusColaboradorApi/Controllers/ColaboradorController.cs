@@ -32,7 +32,8 @@ namespace MindPlusColaboradorApi.Controllers
             await _colaboradorRepository.CadastrarColaborador(colaborador);
             return Ok("Colaborador cadastrado com sucesso.");
         }
-
+        
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> AtualizarColaborador(ColaboradorEntity colaborador)
         {
@@ -40,6 +41,7 @@ namespace MindPlusColaboradorApi.Controllers
             return Ok("Colaborador atualizado com sucesso.");
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> RemoverColaborador(int id)
         {
