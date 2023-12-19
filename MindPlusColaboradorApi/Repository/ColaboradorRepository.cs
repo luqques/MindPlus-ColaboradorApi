@@ -2,6 +2,7 @@
 using MindPlusColaboradorApi.Contracts.Repository;
 using MindPlusColaboradorApi.DTO;
 using MindPlusColaboradorApi.Entity;
+using MindPlusColaboradorApi.Infrastructure;
 using MinhaApiAula.Infrastructure;
 
 namespace MindPlusColaboradorApi.Repository
@@ -43,6 +44,16 @@ namespace MindPlusColaboradorApi.Repository
         {
             string sql = @"SELECT * FROM COLABORADOR";
             return await GetConnection().QueryAsync<ColaboradorEntity>(sql);
+        }
+
+        public async Task<ColaboradorTokenDTO> LogIn(LoginDto colaborador)
+        {
+            string sql = "SELECT * FROM colaborador WHERE Email = @Email AND Senha = @Senha";
+            ColaboradorEntity colaboradorLogin = await GetConnection().QueryFirstAsync<ColaboradorEntity>(sql, colaborador);
+            return new ColaboradorTokenDTO
+            {
+                Token = Authentication.GenerateToken(colaboradorLogin)
+            };
         }
     }
 }

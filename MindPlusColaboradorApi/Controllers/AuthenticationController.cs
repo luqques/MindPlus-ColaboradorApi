@@ -17,7 +17,7 @@ namespace MindPlusColaboradorApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AutenticarLogin([FromBody] LoginRequestDto loginRequest)
+        public async Task<IActionResult> AutenticarLogin([FromBody] LoginDto loginRequest)
         {
             if (string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Senha))
                 return BadRequest("Email e senha são obrigatórios.");

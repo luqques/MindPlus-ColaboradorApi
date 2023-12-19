@@ -9,5 +9,6 @@ namespace MindPlusColaboradorApi.Contracts.Repository
         Task AtualizarColaborador(ColaboradorEntity colaborador);
         Task RemoverColaborador(int id);
         Task<IEnumerable<ColaboradorEntity>> VisualizarColaboradores();
+        Task<ColaboradorTokenDTO> LogIn(LoginDto colaborador);
     }
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MindPlusColaboradorApi.Contracts.Repository;
 using MindPlusColaboradorApi.DTO;
 using MindPlusColaboradorApi.Entity;
+using Org.BouncyCastle.Utilities;
 
 namespace MindPlusColaboradorApi.Controllers
 {
@@ -16,12 +18,14 @@ namespace MindPlusColaboradorApi.Controllers
             _colaboradorRepository = colaboradorRepository;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> VisualizarColaboradores()
         {
             return Ok(await _colaboradorRepository.VisualizarColaboradores());
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CadastrarColaborador(ColaboradorDTO colaborador)
         {
@@ -41,6 +45,20 @@ namespace MindPlusColaboradorApi.Controllers
         {
             await _colaboradorRepository.RemoverColaborador(id);
             return Ok("Colaborador removido com sucesso.");
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> LogIn(LoginDto colaborador)
+        {
+            try
+            {
+                return Ok(await _colaboradorRepository.LogIn(colaborador));
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized("Usuário ou senha inválidos.");
+            }
         }
     }
 }
