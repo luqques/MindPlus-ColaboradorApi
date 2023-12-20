@@ -17,7 +17,8 @@ namespace MindPlusColaboradorApi.Infrastructure
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, colaborador.Nome),
-                    new Claim(ClaimTypes.Email, colaborador.Email)
+                    new Claim(ClaimTypes.Email, colaborador.Email),
+                    new Claim(ClaimTypes.Role, colaborador.Role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

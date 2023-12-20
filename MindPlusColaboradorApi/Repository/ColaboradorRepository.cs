@@ -20,6 +20,7 @@ namespace MindPlusColaboradorApi.Repository
                             Endereco = @Endereco,
                             Empresa = @Empresa,
                             Cargo = @Cargo
+                            Role = @Role
                         WHERE Id = @Id
             ";
             await Execute(sql, colaborador);
@@ -28,8 +29,8 @@ namespace MindPlusColaboradorApi.Repository
         public async Task CadastrarColaborador(ColaboradorDTO colaborador)
         {
             string sql = @"
-                INSERT INTO COLABORADOR (Nome, Email, Senha, Telefone, Endereco, Empresa, Cargo)
-                            VALUE (@Nome, @Email, @Senha, @Telefone, @Endereco, @Empresa, @Cargo)
+                INSERT INTO COLABORADOR (Nome, Email, Senha, Telefone, Endereco, Empresa, Cargo, Role)
+                            VALUE (@Nome, @Email, @Senha, @Telefone, @Endereco, @Empresa, @Cargo, @Role)
             ";
             await Execute(sql, colaborador);
         }
@@ -52,7 +53,8 @@ namespace MindPlusColaboradorApi.Repository
             ColaboradorEntity colaboradorLogin = await GetConnection().QueryFirstAsync<ColaboradorEntity>(sql, colaborador);
             return new ColaboradorTokenDTO
             {
-                Token = Authentication.GenerateToken(colaboradorLogin)
+                Token = Authentication.GenerateToken(colaboradorLogin),
+                Colaborador = colaboradorLogin
             };
         }
     }

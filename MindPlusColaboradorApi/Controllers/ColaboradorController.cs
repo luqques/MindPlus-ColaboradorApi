@@ -18,31 +18,31 @@ namespace MindPlusColaboradorApi.Controllers
             _colaboradorRepository = colaboradorRepository;
         }
 
-        [Authorize]
         [HttpGet]
+        [Authorize(Roles = "user")]
         public async Task<IActionResult> VisualizarColaboradores()
         {
             return Ok(await _colaboradorRepository.VisualizarColaboradores());
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CadastrarColaborador(ColaboradorDTO colaborador)
         {
             await _colaboradorRepository.CadastrarColaborador(colaborador);
             return Ok("Colaborador cadastrado com sucesso.");
         }
         
-        [Authorize]
         [HttpPut]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> AtualizarColaborador(ColaboradorEntity colaborador)
         {
             await _colaboradorRepository.AtualizarColaborador(colaborador);
             return Ok("Colaborador atualizado com sucesso.");
         }
-
-        [Authorize]
+        
         [HttpDelete]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> RemoverColaborador(int id)
         {
             await _colaboradorRepository.RemoverColaborador(id);
